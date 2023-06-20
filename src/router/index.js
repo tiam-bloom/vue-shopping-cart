@@ -14,7 +14,7 @@ export default new VueRouter({
       children: [
         {
           name: "home",
-          path: "/home",
+          path: "home",
           component: () => import("@/view/Home.vue"),
           meta: {
             title: "个人中心",
@@ -23,7 +23,7 @@ export default new VueRouter({
         },
         {
           name: "cart",
-          path: "/cart",
+          path: "cart",
           component: () => import("@/view/Cart.vue"),
           meta: {
             title: "购物车",
@@ -32,7 +32,7 @@ export default new VueRouter({
         },
         {
           name: "products",
-          path: "/products",
+          path: "products",
           component: () => import("@/view/Products.vue"),
           meta: {
             title: "商品列表",

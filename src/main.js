@@ -1,12 +1,12 @@
 import Vue from "vue";
-import App from "./App.vue";
+import App from "@/App.vue";
 
 Vue.config.productionTip = false;
 
-import store from "./store/index.js";
-import router from "./router/index.js";
+import store from "@/store/index.js";
+import router from "@/router/index.js";
 
-import "./Mock/index.js";
+import "@/Mock/index.js";
 import "@/assets/css/style.css";
 
 import ElementUI from "element-ui";

@@ -61,7 +61,10 @@ export default {
     methods: {
         addCart(goods) {
             console.log(goods);
-            this.$message.success("加入购物车成功");
+            this.$notify.success({
+                title: '添加成功',
+                message: '加入购物车成功',
+            });
             this.$store.commit('addCart', goods);
         },
         handleClick(tab, event) {
@@ -76,6 +79,7 @@ export default {
     width: 500px;
     margin: 0 auto 10px;
 }
+
 .el-card {
     margin: 20px;
     float: left;
