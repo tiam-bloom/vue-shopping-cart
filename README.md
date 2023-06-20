@@ -1,24 +1,10 @@
 # shooping-cart
 
-## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Element UI: https://element.ele.me/#/zh-CN/component/installation
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Vur-Router3: https://v3.router.vuejs.org/zh/guide/#html
 
-### Lints and fixes files
-```
-npm run lint
-```
+Vue2: https://v2.cn.vuejs.org/v2/guide/
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Vuex3: https://v3.vuex.vuejs.org/zh/
