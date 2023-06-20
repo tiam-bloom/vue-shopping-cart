@@ -1,11 +1,12 @@
 //   router/index.js
 import VueRouter from "vue-router";
 import Vue from "vue";
+import { start, close } from "@/utils/nprogress.js";
 
 // 插件一定要使用
 Vue.use(VueRouter);
 
-export default new VueRouter({
+const router = new VueRouter({
   routes: [
     {
       path: "/",
@@ -17,34 +18,51 @@ export default new VueRouter({
           path: "home",
           component: () => import("@/view/Home.vue"),
           meta: {
+            isShow: true,
             title: "个人中心",
-            icon: "el-icon-setting"
-          }
+            icon: "el-icon-setting",
+          },
         },
         {
           name: "cart",
           path: "cart",
           component: () => import("@/view/Cart.vue"),
           meta: {
+            isShow: true,
             title: "购物车",
-            icon: "el-icon-menu"
-          }
+            icon: "el-icon-menu",
+          },
         },
         {
           name: "products",
           path: "products",
           component: () => import("@/view/Products.vue"),
           meta: {
+            isShow: true,
             title: "商品列表",
-            icon: "el-icon-document"
-          }
+            icon: "el-icon-document",
+          },
+        },
+        {
+          name: "login",
+          path: "/login",
+          component: () => import("@/components/Login.vue"),
+          meta: {
+            isShow: false,
+          },
         },
       ],
     },
-    {
-        name: "login",
-        path: "/login",
-        component: () => import("@/components/Login.vue"),
-    }
   ],
 });
+
+router.beforeEach((to, from, next) => {
+  start();
+  next();
+});
+
+router.afterEach((to, from) => {
+  close();
+});
+
+export default router;

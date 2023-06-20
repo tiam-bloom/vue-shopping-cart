@@ -2,11 +2,12 @@
     <div class="aside">
         <el-row class="tac">
             <el-col>
+                
                 <!-- https://blog.csdn.net/qq_40197100/article/details/111587781 -->
-                <el-menu :default-active="$router.path" router class="el-menu-vertical-demo" @open="handleOpen"
+                <el-menu :default-active="$route.name" router class="el-menu-vertical-demo" @open="handleOpen"
                     @close="handleClose">
 
-                    <el-menu-item v-for="route of $router.options.routes[0].children" :index="route.path">
+                    <el-menu-item v-for="route of $router.options.routes[0].children" :index="route.path" v-if="route.meta.isShow">
                         <i :class="route.meta.icon"></i>
                         <span slot="title">{{route.meta.title}}</span>
                     </el-menu-item>

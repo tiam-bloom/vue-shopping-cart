@@ -1,6 +1,6 @@
 <template>
     <div class="body-class">
-        <div class="container right-panel-active">
+        <div class="container">
             <!-- Sign Up -->
             <div class="container__form container--signup">
                 <form action="#" class="form" @submit="register">
@@ -120,7 +120,7 @@ export default {
 <style scoped>
 .body-class {
     align-items: center;
-    background-color: var(--white);
+    /* background-color: var(--white); */
     /*  background: url("https://res.cloudinary.com/dbhnlktrv/image/upload/v1599997626/background_oeuhe7.jpg");*/
     /* background: url("imgs/bj01.png"); */
     /* 决定背景图像的位置是在视口内固定，或者随着包含它的区块滚动。 */
@@ -130,7 +130,7 @@ export default {
     background-repeat: no-repeat;
     background-size: cover;
     display: grid;
-    height: 100vh;
+    height: calc(100vh - 100px);
     place-items: center;
 }
 

@@ -29,6 +29,12 @@ const mutations = {
   removeCart(state, goods) {
     state.cartlist.splice(state.cartlist.indexOf(goods), 1);
   },
+  // 清空购物车(已勾选的商品)
+  clearCart(state, selectedGoods) {
+    state.cartlist = state.cartlist.filter(goods => {
+      return !selectedGoods.includes(goods);
+    });
+  },
 };
 // 相当于数据库,存储数据, , 类似Vue实例中的data属性
 const state = {

@@ -1,5 +1,5 @@
 <template>
-    <transition name="fade-transform" mode="out-in">
+    <transition name="el-fade-in" mode="out-in">
         <keep-alive>
             <router-view :key="$route.name" />
         </keep-alive>
@@ -9,7 +9,6 @@
 <script>
 export default {
     name: 'Main',
-
 }
 </script>
   

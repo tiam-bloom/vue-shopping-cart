@@ -1,5 +1,5 @@
 {
-  "name": "shooping-cart",
+  "name": "shopping-cart",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,6 +12,7 @@
     "core-js": "^3.8.3",
     "element-ui": "^2.15.13",
     "mockjs": "^1.1.0",
+    "nprogress": "^0.2.0",
     "path": "^0.12.7",
     "vue": "^2.7.14",
     "vue-router": "^3.6.5",

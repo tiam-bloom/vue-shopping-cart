@@ -1,9 +1,14 @@
 <template>
     <div class="products">
         <div class="search-input">
-            <el-input placeholder="请输入商品名" v-model="keywords" class="input-with-select">
-                <el-button slot="append" icon="el-icon-search"></el-button>
-            </el-input>
+            <form class="input-with-select el-input el-input-group el-input-group--append" @submit="handleSearch">
+                <input type="text" autocomplete="off" placeholder="请输入商品名" class="el-input__inner" ref="keywords"/>
+                <div class="el-input-group__append">
+                    <button type="submit" class="el-button el-button--default" >
+                        <i class="el-icon-search"></i>
+                    </button>
+                </div>
+            </form>
         </div>
         <el-tabs v-model="activeCategory" type="card" @tab-click="handleClick">
             <el-tab-pane label="首页" name="首页"></el-tab-pane>
@@ -20,7 +25,7 @@
                 <div class="goods-bottom">
                     <div class="good-price-cat">
                         <span>{{ goods.price }}</span>
-                        <el-tag type="warning" size="mini">{{ goods.category }}</el-tag>
+                        <el-tag  size="mini">{{ goods.category }}</el-tag>
                     </div>
                     <span>{{ goods.title }}</span>
                     <div class="bottom clearfix">
@@ -35,11 +40,11 @@
   
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex';
 export default {
     name: 'Products',
     data() {
         return {
-            goodslist: [],
             activeCategory: '首页',
             keywords: '',
             categories: []
@@ -47,29 +52,41 @@ export default {
     },
     created() {
         axios.get('/api/goods').then(res => {
-            console.log(res.data)
+            // console.log(res.data)
             this.categories = new Set(res.data.data.map(item => item.category));
             this.$store.commit('setGoodsList', res.data.data);
-            this.goodslist = res.data.data;
         })
     },
     computed: {
+        ...mapState(['cartlist', 'goodslist']),
         filterGoods() {
             return this.goodslist.filter(item => item.title.includes(this.keywords) && (this.activeCategory == "首页" || item.category === this.activeCategory));
-        }
+        },
     },
     methods: {
+        // 加入购物车
         addCart(goods) {
-            console.log(goods);
+            // console.log(goods);
+            // 判断购物车中是否存在
+            if (this.cartlist.find(item => item.id === goods.id)) {
+                this.$notify.warning({
+                    title: '添加失败',
+                    message: `${goods.title}已经在购物车中了`,
+                });
+                return;
+            }
             this.$notify.success({
                 title: '添加成功',
-                message: '加入购物车成功',
+                message: `${goods.title}已成功加入购物车`,
             });
             this.$store.commit('addCart', goods);
         },
         handleClick(tab, event) {
-            console.log(tab, event);
+            // console.log(tab, event);
         },
+        handleSearch() {
+            this.keywords = this.$refs.keywords.value;
+        }
     }
 }
 </script>
