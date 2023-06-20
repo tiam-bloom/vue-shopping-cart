@@ -1,24 +1,28 @@
 /* 全局样式 */
 body {
-    margin: 0;
+  margin: 0;
 }
 /* 选择文档根元素 */
 :root {
-    /* COLORS */
-    --white: #e9e9e9;
-    --gray: #333;
-    --blue: #0367a6;
-    --lightblue: #008997;
-    /* --lightblue: #409EFF; */
+  /* COLORS */
+  --white: #e9e9e9;
+  --gray: #333;
+  --blue: #0367a6;
+  --lightblue: #008997;
+  /* --lightblue: #409EFF; */
 
-    /* RADII */
-    --button-radius: 0.7rem;
+  /* RADII */
+  --button-radius: 0.7rem;
 
-    /* SIZES */
-    --max-width: 758px;
-    --max-height: 420px;
+  /* SIZES */
+  --max-width: 758px;
+  --max-height: 420px;
 
-    font-size: 16px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+/* nprogress 进度条颜色 */
+#nprogress .bar {
+  background: #044268 !important;
 }
