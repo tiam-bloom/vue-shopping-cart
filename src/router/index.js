@@ -20,7 +20,7 @@ const router = new VueRouter({
           meta: {
             isShow: true,
             title: "个人中心",
-            icon: "el-icon-setting",
+            icon: "el-icon-s-custom",
           },
         },
         {
@@ -30,7 +30,7 @@ const router = new VueRouter({
           meta: {
             isShow: true,
             title: "购物车",
-            icon: "el-icon-menu",
+            icon: "el-icon-shopping-cart-2",
           },
         },
         {
@@ -40,7 +40,7 @@ const router = new VueRouter({
           meta: {
             isShow: true,
             title: "商品列表",
-            icon: "el-icon-document",
+            icon: "el-icon-shopping-bag-1",
           },
         },
         {

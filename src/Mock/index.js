@@ -6,7 +6,7 @@ import Mock from "mockjs";
 Mock.mock("/api/goods", {
   code: 200,
   message: "查询成功",
-  "data|20-50": [
+  "data|50-100": [
     {
       id: "@id",
       // 标题
