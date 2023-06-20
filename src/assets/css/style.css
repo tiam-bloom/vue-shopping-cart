@@ -24,5 +24,5 @@ body {
 }
 /* nprogress 进度条颜色 */
 #nprogress .bar {
-  background: #044268 !important;
+  background: rgb(206, 97, 97) !important;
 }

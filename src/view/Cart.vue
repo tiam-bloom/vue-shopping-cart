@@ -23,9 +23,9 @@
                         label="描述文字"></el-input-number>
                 </template>
             </el-table-column>
-            <el-table-column label="小计（元）" :formater="subtotalFormater" >
+            <el-table-column label="小计（元）" :formater="subtotalFormater">
                 <template slot-scope="scope">
-                    <span>{{ subtotalFormater(scope.row)}}</span>
+                    <span>{{ subtotalFormater(scope.row) }}</span>
                 </template>
             </el-table-column>
             <el-table-column label="操作">
@@ -54,6 +54,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import { Loading } from 'element-ui';
 export default {
     name: 'Cart',
     data() {
@@ -88,20 +89,40 @@ export default {
         handleSelectionChange(goods) {
             this.multipleSelection = goods;
         },
-        priceFormater(row){
+        priceFormater(row) {
             return `￥${row.price.toFixed(2)}`
         },
-        subtotalFormater(row){
+        subtotalFormater(row) {
             return `￥${(row.num * row.price).toFixed(2)}`
         },
-        settlement(){
+        // 结算
+        settlement() {
             // 判断是否有勾选
-            if(this.multipleSelection.length === 0){
+            if (this.multipleSelection.length === 0) {
                 this.$message.warning('请先勾选商品');
                 return;
             }
-            this.$message.success(`结算成功! 一共是${this.totalChecked.toFixed(2)}元`);
-            this.$store.commit('clearCart', this.multipleSelection);
+            this.$confirm(`一共${this.multipleSelection.length}件商品, ${this.totalChecked.toFixed(2)}元, 确定结算吗?`, '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                let loadingInstance = Loading.service({ fullscreen: true });
+
+                setTimeout(() => {
+                    this.$nextTick(() => { // 以服务的方式调用的 Loading 需要异步关闭
+                        loadingInstance.close();
+                    });
+                    this.$message.success(`结算成功! 一共是${this.totalChecked.toFixed(2)}元`);
+                    this.$store.commit('clearCart', this.multipleSelection);
+                }, 1000);
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消结算'
+                });
+            });
+
         }
     }
 }

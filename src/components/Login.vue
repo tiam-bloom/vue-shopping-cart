@@ -110,7 +110,7 @@ export default {
 
             this.$message.success("登录成功");
             // 路由跳转
-            this.$router.push("/products");
+            this.$router.push("/home");
         }
     },
 
