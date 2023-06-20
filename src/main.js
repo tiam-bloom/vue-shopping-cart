@@ -3,6 +3,7 @@ import App from "./App.vue";
 
 Vue.config.productionTip = false;
 
+import store from "./store/index.js";
 import router from "./router/index.js";
 
 import "./Mock/index.js";
@@ -12,10 +13,8 @@ import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 Vue.use(ElementUI);
 
-import Vuex from 'vuex'
-Vue.use(Vuex)
-
 new Vue({
-  render: h => h(App),
+  store,
   router,
+  render: h => h(App),
 }).$mount("#app");

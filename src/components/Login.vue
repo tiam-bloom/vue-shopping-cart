@@ -3,33 +3,33 @@
         <div class="container right-panel-active">
             <!-- Sign Up -->
             <div class="container__form container--signup">
-                <form action="#" class="form" id="form1">
+                <form action="#" class="form" @submit="register">
                     <h2 class="form__title">注册</h2>
 
-                    <input type="text" placeholder="账号" class="input" pattern="[a-zA-Z][a-zA-Z0-9_]{4,15}"
-                        oninvalid="setCustomValidity('请输入以字母开头, 由字母数字下划线组成的4-15位账号!')" oninput="setCustomValidity('')"
-                        required />
-
-                    <input type="email" placeholder="邮箱" class="input" oninvalid="setCustomValidity('请输入正确的邮箱格式!')"
+                    <input v-model="registerForm.username" type="text" placeholder="账号" class="input"
+                        pattern="[a-zA-Z][a-zA-Z0-9_]{4,15}" oninvalid="setCustomValidity('请输入以字母开头, 由字母数字下划线组成的4-15位账号!')"
                         oninput="setCustomValidity('')" required />
-                    <input type="password" placeholder="密码" class="input" pattern="[a-zA-Z0-9_]{5,17}"
-                        oninvalid="setCustomValidity('请输入由数字、字母、下划线组成的5-17位密码!')" oninput="setCustomValidity('')"
-                        required />
 
-                    <button class="btn">注册</button>
+                    <input v-model="registerForm.email" type="email" placeholder="邮箱" class="input"
+                        oninvalid="setCustomValidity('请输入正确的邮箱格式!')" oninput="setCustomValidity('')" required />
+                    <input v-model="registerForm.password" type="password" placeholder="密码" class="input"
+                        pattern="[a-zA-Z0-9_]{5,17}" oninvalid="setCustomValidity('请输入由数字、字母、下划线组成的5-17位密码!')"
+                        oninput="setCustomValidity('')" required />
+
+                    <button class="btn" >注册</button>
                 </form>
             </div>
 
             <!-- Sign In -->
             <div class="container__form container--signin">
-                <form action="#" class="form" id="form2">
+                <form action="#" class="form" @submit="login">
                     <h2 class="form__title">登录</h2>
 
-                    <input type="text" placeholder="账号" class="input" required />
-                    <input type="password" placeholder="密码" class="input" required />
+                    <input v-model="loginForm.username" type="text" placeholder="账号" class="input" required />
+                    <input v-model="loginForm.password" type="password" placeholder="密码" class="input" required />
 
                     <a href="#" class="link">忘记密码?</a>
-                    <button class="btn" onclick="tz()">登录</button>
+                    <button class="btn" >登录</button>
                 </form>
             </div>
 
@@ -52,6 +52,19 @@
 <script >
 export default {
     name: 'Login',
+    data() {
+        return {
+            loginForm: {
+                username: '',
+                password: ''
+            },
+            registerForm: {
+                username: '',
+                email: '',
+                password: ''
+            },
+        }
+    },
     methods: {
         backLogin() {
             const container = document.querySelector(".container");
@@ -61,6 +74,44 @@ export default {
             const container = document.querySelector(".container");
             container.classList.add("right-panel-active");
         },
+        register() {
+            // 使用优先级 const > let > var
+            const { username } = this.registerForm;
+            const users = JSON.parse(localStorage.getItem("users")) || [];
+            const user = users.find(user => user.username === username);
+            if (user) {
+                this.$message.warning("账号已注册！请换一个试试");
+                return;
+            }
+            users.push(this.registerForm);
+            localStorage.setItem("users", JSON.stringify(users));
+
+            // 通过html的required属性, 校验是否为空
+            this.$message.success("注册成功!请登录");
+
+            // 调整到登录页面
+            const container = document.querySelector(".container");
+            container.classList.remove("right-panel-active");
+        },
+        login() {
+            const { username, password } = this.loginForm;
+            const users = JSON.parse(localStorage.getItem("users")) || [];
+            const user = users.find(user => user.username === username);
+            if (!user) {
+                this.$message.warning("账号不存在, 请先注册");
+                return;
+            }
+            if (user.password !== password) {
+                this.$message.warning("密码错误");
+                return;
+            }
+            // 保存登录状态
+            sessionStorage.setItem("token", user.username);
+
+            this.$message.success("登录成功");
+            // 路由跳转
+            this.$router.push("/products");
+        }
     },
 
 }
