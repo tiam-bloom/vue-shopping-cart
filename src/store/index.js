@@ -5,19 +5,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 // 使用插件
 Vue.use(Vuex);
-// 相当于service层, 处理主要业务逻辑
-const actions = {
-  // 此处调用API
-  fun(context, val) {
-    // 传递给其他函数继续处理
-    context.dispatch("fun1", val);
-    // 提交给 mutations 层
-    context.commit("FUN", val);
-  },
-  fun1(context, val) {
-    console.log("方法1处理业务");
-  },
-};
+
 // 相当于DAO层, 操作数据
 const mutations = {
   addCart(state, goods) {
@@ -42,18 +30,9 @@ const state = {
   goodslist: [],
   // 购物车列表
   cartlist: [],
-  num: 0,
-};
-// 类似于Vue实例的computed属性
-const getters = {
-  computedNum(state) {
-    return state.num * 10;
-  },
 };
 
 export default new Vuex.Store({
-  actions,
   mutations,
   state,
-  getters,
 });

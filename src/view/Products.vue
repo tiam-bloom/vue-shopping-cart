@@ -1,10 +1,10 @@
 <template>
     <div class="products">
         <div class="search-input">
-            <form class="input-with-select el-input el-input-group el-input-group--append" @submit="handleSearch">
+            <form class="el-input el-input-group el-input-group--append " @submit="handleSearch">
                 <input type="text" autocomplete="off" placeholder="请输入商品名" class="el-input__inner" ref="keywords"/>
                 <div class="el-input-group__append">
-                    <button type="submit" class="el-button el-button--default" >
+                    <button type="submit" class="el-button el-button--default">
                         <i class="el-icon-search"></i>
                     </button>
                 </div>
@@ -25,7 +25,7 @@
                 <div class="goods-bottom">
                     <div class="good-price-cat">
                         <span>{{ goods.price }}</span>
-                        <el-tag  size="mini">{{ goods.category }}</el-tag>
+                        <el-tag size="mini">{{ goods.category }}</el-tag>
                     </div>
                     <span>{{ goods.title }}</span>
                     <div class="bottom clearfix">
@@ -56,6 +56,18 @@ export default {
             this.categories = new Set(res.data.data.map(item => item.category));
             this.$store.commit('setGoodsList', res.data.data);
         })
+    },
+    watch: {
+        // keywords改变时触发
+        keywords() {
+            if (this.filterGoods.length === 0) {
+                this.$notify.warning({
+                    title: '提示',
+                    message: '没有找到相关商品',
+                });
+            }
+        },
+
     },
     computed: {
         ...mapState(['cartlist', 'goodslist']),
