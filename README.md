@@ -38,3 +38,17 @@ Vuex3: https://v3.vuex.vuejs.org/zh/
 - [x] 登录注册未登录成功却直接跳转首页, 
 - [x] 进入界面时, 未激活当前展示的侧边导航
 - [x] 搜索时, 点击搜索时再进行搜索
+
+
+
+## 项目截图
+
+![image-20230621081718367](http://qiniu.yujing.fit/typora_img/image-20230621081718367.png)
+
+![image-20230621081833493](http://qiniu.yujing.fit/typora_img/image-20230621081833493.png)
+
+![image-20230621081816067](http://qiniu.yujing.fit/typora_img/image-20230621081816067.png)
+
+![image-20230621081849349](http://qiniu.yujing.fit/typora_img/image-20230621081849349.png)
+
+![image-20230621081919976](http://qiniu.yujing.fit/typora_img/image-20230621081919976.png)
